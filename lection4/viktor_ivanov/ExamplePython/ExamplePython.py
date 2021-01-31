@@ -5,6 +5,7 @@ def print_exercise_header(n: str, isEnd: bool):
     else:
         print(f"\nEnd of Exercise {n}\n")
 
+# Number-To-Word Solution taken from StackOverflow: https://stackoverflow.com/a/24123028
 def as_words(n):
     # Convert an integer n (+ve or -ve) to English words.
     # lookups
