@@ -72,6 +72,10 @@ print_exercise_header(2, False)
 # -----------------------------------------------------------------------------------
 
 inputString = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mattis tempus suscipit. Mauris efficitur interdum turpis, vitae varius nunc fringilla non. Vestibulum malesuada fringilla tellus vel iaculis. In vehicula gravida fermentum. Vivamus ultrices lacinia pretium. Mauris orci lectus, lacinia at placerat ut, aliquam at quam. Donec condimentum feugiat arcu, ut consectetur tortor ornare id. Vivamus et arcu nunc. Morbi viverra quam id libero rutrum elementum. Integer nibh eros, varius eu euismod ac, accumsan congue mauris. Integer eu mattis dui. Pellentesque volutpat vehicula ultrices."
+
+inputString = inputString.replace(",", "")
+inputString = inputString.replace(".", "")
+
 words = inputString.split(' ')
 filterCharacters = {'t', 'o'}
 
@@ -107,7 +111,10 @@ for x in range(1, maxDuplicateCount + 1):
         if (words.count(word) == x):
             newDuplicateDict[as_words(x)].add(word)
 
-print(newDuplicateDict)
+newDuplicateDictCount = {word: len(word) * len(newDuplicateDict[word]) for word in newDuplicateDict}
+
+print(f"{newDuplicateDict}\n")
+print(newDuplicateDictCount)
 
 # Manual
 
@@ -121,7 +128,10 @@ print(newDuplicateDict)
 #    if(words.count(word) == 3):
 #        duplicatesCountDict["three"].add(word)
 
+#duplicateDictCount = {word: len(str(word)) * len(duplicatesCountDict[word]) for word in duplicatesCountDict}
+
 #print(duplicatesCountDict)
+#print(duplicateDictCount)
 
 # -----------------------------------------------------------------------------------
 print_exercise_header(3,True)
