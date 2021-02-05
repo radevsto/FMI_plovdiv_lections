@@ -6,17 +6,23 @@ for num in range(101):
             even = str(num)
         else:
             even = even + ", " + str(num)
+
 print("Even numbers: " + even)
+            
+# Питонския вариант е even = list()
+# при условието - само even.append()
+# при принта - (", ").join(even)
+
 # ---------------------------------------------------------------------------------
 # 2
 string = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mattis tempus suscipit. Mauris efficitur interdum turpis, vitae varius nunc fringilla non. Vestibulum malesuada fringilla tellus vel iaculis. In vehicula gravida fermentum. Vivamus ultrices lacinia pretium. Mauris orci lectus, lacinia at placerat ut, aliquam at quam. Donec condimentum feugiat arcu, ut consectetur tortor ornare id. Vivamus et arcu nunc. Morbi viverra quam id libero rutrum elementum. Integer nibh eros, varius eu euismod ac, accumsan congue mauris. Integer eu mattis dui. Pellentesque volutpat vehicula ultrices.'
 stringRemoveDot = string.replace(".", "")
-stringRemoveDot = stringRemoveDot.replace(",", "")
+stringRemoveDot = stringRemoveDot.replace(",", "") # stringRemoveComma may be ? ;)
 splitString = stringRemoveDot.split()
 otString = ""
 for word in splitString:
     if (word.endswith("t") | word.endswith("o")):
-        if (otString == ""):
+        if (otString == ""): # Коментара от първа задача е приложим и тук
             otString = "" + word
         elif (otString != ""):
             otString = otString + ", " + word
@@ -29,7 +35,7 @@ num2words = {
     14: 'Fourteen', 15: 'Fifteen', 16: 'Sixteen', 17: 'Seventeen', 18: 'Eighteen',
     19: 'Nineteen', 20: 'Twenty', 30: 'Thirty', 40: 'Forty', 50: 'Fifty', 60: 'Sixty',
     70: 'Seventy', 80: 'Eighty', 90: 'Ninety', 0: 'Zero'
-    }
+    } # Браво, точно такъв мапинг очаквахме
 
 
 def n2w(n):         # Function to use to convert numbers into words
