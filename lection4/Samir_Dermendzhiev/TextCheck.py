@@ -23,3 +23,9 @@ for word in words:
 #     print(occurrences[word])
 
 print(occurrences)
+# Условието на задачата е резултата да има следния формат:
+# dict['two'] = ['at', 'ac', 'eu' ...]
+# dict['three'] = ['sit', 'non' 'dui’ … ]
+# Генерирания от вас дикт има следния:
+# dict[2] = ['at', 'ac', 'eu' ...]
+# dict[3] = ['sit', 'non' 'dui’ … ]
