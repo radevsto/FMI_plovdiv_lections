@@ -5,6 +5,8 @@ import itertools
 def main():
     # Exercise 1: Print all even numbers between 0 and 100
     # Starting from 2 because 0 is not an even number
+    
+    # За да вземеш числата до 100 - в рейндж използвай n+1 (101)
     for number in range(2, 100, 2):
         print(number)
 
