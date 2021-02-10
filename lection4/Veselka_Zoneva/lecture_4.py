@@ -15,8 +15,6 @@ string = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus matti
 
 string = re.sub(r'\W+', ' ', string)
 
-print(string)
-
 strArr = []
 
 for i in string.split():
