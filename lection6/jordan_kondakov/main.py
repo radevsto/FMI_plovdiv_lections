@@ -38,6 +38,7 @@ def main():
 
     # Exercise 3: Given the number count, print Fibonacci numbers
     # print_fibonacci_numbers(40)
+    # Should've done the fib sequence with memoization. This would make it even faster when given big number count...
 
 
 if __name__ == "__main__":
