@@ -1,4 +1,5 @@
 import re
+from math import sqrt
 
 a = 100
 for num in range(a+1):
@@ -48,7 +49,7 @@ def pyramid(n):
 
 pyramid(10)
 
-from math import sqrt
+
 
 def Hypotenuse():
     a=float(input("Input the lenght of the side a: "))
