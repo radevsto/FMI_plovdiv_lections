@@ -21,7 +21,13 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CSVConverter.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ExamplePython.py" />
+    <Compile Include="JsonConverter.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="input.txt" />

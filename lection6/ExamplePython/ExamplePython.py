@@ -1,20 +1,36 @@
-import json
-import csv
-import os
-from enum import Enum
+import argparse
+import JsonConverter
+import CSVConverter
 
-class OutputType(Enum):
-    CSV = 1
-    JSON = 2
-    ALL = 3
+## Exercise
+
+#Направете програма, която от файл подаден
+#като аргумент прави следното:
+#Отваря и прочита файла.
+#Процесва файла на параграфи. Всеки параграх
+#започва с ## Begin и завършва с ## End
+#За всеки параграф направете dictionary
+#структуора която има следната структура
+#{ “paragraph A”: { “name”: “Module_data”,
+#“type”: “file”,
+#“format”: “json”
+#}
+#4. С опция създайте json или csv изходен файл
+#съдържащ данните от речника
 
 # Read all lines from a text file (Task #1)
 def get_text_file_input(path: str):
-    file = open(path, "r")
-    return file.readlines()
+    try:
+        file = open(path, "r")
+        return file.readlines()
+    except:
+        print("Could not locate file")
 
-#Transformation of the Text File into Dictionary Files (Task #2 and Task #3)
+# Transformation of the Text File into Dictionary Files (Task #2 and Task #3)
 def get_dictionary_files(inputLines: str):
+    if inputLines == None:
+        return None
+
     paragraphDict = {"paragraph": dict()}
     paragraphs = []
 
@@ -33,61 +49,41 @@ def get_dictionary_files(inputLines: str):
                     paragraph[key][i] = paragraph[key][i].split('=')
                     paragraph[key][i] = {paragraph[key][i][0]:paragraph[key][i][1]}
 
-    print(paragraphs)
     return paragraphs
 
-# Output the Dictionary files into .csv and .json files (Task #4)
-def output_file(path: str, outputType: Enum=OutputType.ALL):
-    input = get_dictionary_files(get_text_file_input(path))
+def main():
+    parser = argparse.ArgumentParser(description="Input Text File Path")
 
-    ## JSON File Write
-    if outputType == OutputType.JSON or outputType == OutputType.ALL:
-        print("\nJSON")
-        print("******************")
+    parser.add_argument("--path", type = str,help = "Path for the file (By default, it's set as input.txt)")
+    parser.add_argument("--format", type = str, help = "Output Input File to JSON, CSV or BOTH")
 
-        jsonOutput = json.dumps(input)
-        try:
-            with open("input.json", "w") as file_json:
-                file_json.write(jsonOutput)
-                print("Transformation Successful, JSON File Written")
-        except:
-            print("Could not complete JSON Transformation")
-        finally:
-            file_json.close()
+    args = parser.parse_args()
 
-    ## CSV File Write
-    if outputType == OutputType.CSV or outputType == OutputType.ALL:
-        print("\nCSV")
-        print("******************")
-        
-        try:
-            with open("input.csv", "w", newline="") as file_csv:
-                file_csv.write("|")
+    file = args.path
+    option = args.format
 
-                # Headers
-                for paragraph in input[0].values():
-                    for header in paragraph:
-                        for key in header.keys():
-                            file_csv.write(f"|{key}")
+    if file is None:
+        file = "input.txt"
+    
+    if option is None:
+        option = "all"
+    
+    while(1):
+        if option.lower() == "csv":
+            CSVConverter.output_file(get_dictionary_files(get_text_file_input(file)))
+            break
+        elif option.lower() == "json":
+            JsonConverter.output_file(get_dictionary_files(get_text_file_input(file)))
+            break
+        elif option.lower() == "all":
+            dictList = get_dictionary_files(get_text_file_input(file))
+            JsonConverter.output_file(dictList)
+            CSVConverter.output_file(dictList)
+            break
+        else:
+            print("Unrecognised option, please try again")
+            continue
 
-                file_csv.write("\n")
 
-                # Content (The reason for using a string here is to remove the last character in the file with relative ease)
-                contentString = ""
-                for paragraph in input:
-                    for key in paragraph:
-                        contentString += (f"|{key}")
-                        for line in paragraph[key]:
-                            for value in line.values():
-                                 contentString += (f"|{value}")
-                     
-                        contentString += ("\n")
-
-                file_csv.write(contentString[:-1])
-                print("Transformation Successful, CSV File Written")
-        except:
-             print("Could not complete CSV Transformation")
-        finally:
-             file_csv.close()
-
-output_file("input.txt")
+if __name__ == "__main__":
+    main()
