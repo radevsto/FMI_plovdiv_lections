@@ -1,4 +1,3 @@
-import re
 import json
 import csv
 from enum import Enum
@@ -8,10 +7,12 @@ class OutputType(Enum):
     JSON = 2
     ALL = 3
 
+# Read all lines from a text file (Task #1)
 def get_text_file_input(path: str):
     file = open(path, "r")
     return file.readlines()
 
+#Transformation of the Text File into Dictionary Files (Task #2 and Task #3)
 def get_dictionary_files(inputLines: str):
     paragraphDict = {"paragraph": dict()}
     paragraphs = []
@@ -34,17 +35,18 @@ def get_dictionary_files(inputLines: str):
     print(paragraphs)
     return paragraphs
 
-def output_file(outputType: Enum):
-    input = get_dictionary_files(get_text_file_input("input.txt"))
+# Output the Dictionary files into .csv and .json files (Task #4)
+def output_file(path: str, outputType: Enum = OutputType.ALL):
+    input = get_dictionary_files(get_text_file_input(path))
 
-    # JSON Solution
+    ## JSON File Write
     if outputType == OutputType.JSON or outputType == OutputType.ALL:
-        jsonInput = json.dumps(input)
+        jsonOutput = json.dumps(input)
         print("\nJSON")
         print("******************")
         try:
             with open("input.json", "w") as file_json:
-                file_json.write(jsonInput)
+                file_json.write(jsonOutput)
                 print("Transformation Successful, JSON File Written")
         except:
             print("Could not complete JSON Transformation")
@@ -53,12 +55,34 @@ def output_file(outputType: Enum):
         print("\nCSV")
         print("******************")
         
-    # CSV Solution does not work yet
+    ## CSV File Write
+    # Automatic (does not work for now)
     #keys = ["name", "type", "format"]
     #with open("input.csv", "w", newline = "") as output_file_csv:
     #    dict_writer = csv.DictWriter(output_file_csv, keys)
     #    dict_writer.writeheader()
     #    dict_writer.writerows(input)
-        return
 
-output_file(OutputType.ALL)
+    # Manual
+        keys = ["name", "type", "format"]
+        with open("input.csv", "w", newline="") as file_csv:
+            file_csv.write("|")
+        # Headers
+            for key in keys:
+                file_csv.write(f"|{key}")
+
+            file_csv.write("\n")
+
+        #Content
+            for paragraph in input:
+                for key in paragraph:
+                    file_csv.write(f"|{key}")
+                    file_csv.write(f"|{paragraph[key][0]['name']}")
+                    file_csv.write(f"|{paragraph[key][1]['type']}")
+                    file_csv.write(f"|{paragraph[key][2]['format']}")
+                    file_csv.write("\n")
+
+            print("Transformation Successful, CSV File Written")
+
+
+output_file("input.txt")
