@@ -1,5 +1,6 @@
 import json
 import csv
+import os
 from enum import Enum
 
 class OutputType(Enum):
@@ -36,53 +37,57 @@ def get_dictionary_files(inputLines: str):
     return paragraphs
 
 # Output the Dictionary files into .csv and .json files (Task #4)
-def output_file(path: str, outputType: Enum = OutputType.ALL):
+def output_file(path: str, outputType: Enum=OutputType.ALL):
     input = get_dictionary_files(get_text_file_input(path))
 
     ## JSON File Write
     if outputType == OutputType.JSON or outputType == OutputType.ALL:
-        jsonOutput = json.dumps(input)
         print("\nJSON")
         print("******************")
+
+        jsonOutput = json.dumps(input)
         try:
             with open("input.json", "w") as file_json:
                 file_json.write(jsonOutput)
                 print("Transformation Successful, JSON File Written")
         except:
             print("Could not complete JSON Transformation")
+        finally:
+            file_json.close()
 
+    ## CSV File Write
     if outputType == OutputType.CSV or outputType == OutputType.ALL:
         print("\nCSV")
         print("******************")
         
-    ## CSV File Write
-    # Automatic (does not work for now)
-    #keys = ["name", "type", "format"]
-    #with open("input.csv", "w", newline = "") as output_file_csv:
-    #    dict_writer = csv.DictWriter(output_file_csv, keys)
-    #    dict_writer.writeheader()
-    #    dict_writer.writerows(input)
+        try:
+            with open("input.csv", "w", newline="") as file_csv:
+                file_csv.write("|")
 
-    # Manual
-        keys = ["name", "type", "format"]
-        with open("input.csv", "w", newline="") as file_csv:
-            file_csv.write("|")
-        # Headers
-            for key in keys:
-                file_csv.write(f"|{key}")
+                # Headers
+                for paragraph in input[0].values():
+                    for header in paragraph:
+                        for key in header.keys():
+                            file_csv.write(f"|{key}")
 
-            file_csv.write("\n")
+                file_csv.write("\n")
 
-        #Content
-            for paragraph in input:
-                for key in paragraph:
-                    file_csv.write(f"|{key}")
-                    file_csv.write(f"|{paragraph[key][0]['name']}")
-                    file_csv.write(f"|{paragraph[key][1]['type']}")
-                    file_csv.write(f"|{paragraph[key][2]['format']}")
-                    file_csv.write("\n")
+                # Content (The reason for using a string here is to remove the last character in the file with relative ease)
+                contentString = ""
+                for paragraph in input:
+                    for key in paragraph:
+                        contentString += (f"|{key}")
+                        for line in paragraph[key]:
+                            for value in line.values():
+                                 contentString += (f"|{value}")
+                     
+                        contentString += ("\n")
 
-            print("Transformation Successful, CSV File Written")
-
+                file_csv.write(contentString[:-1])
+                print("Transformation Successful, CSV File Written")
+        except:
+             print("Could not complete CSV Transformation")
+        finally:
+             file_csv.close()
 
 output_file("input.txt")
