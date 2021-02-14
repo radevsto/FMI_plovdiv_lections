@@ -21,16 +21,15 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CSVConverter.py">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="lib\CSVConverter.py" />
     <Compile Include="ExamplePython.py" />
-    <Compile Include="JsonConverter.py">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="lib\JsonConverter.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="input.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="lib\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
