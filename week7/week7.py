@@ -1,7 +1,7 @@
 import argparse
 import re
-from lib import csvconverter
-from lib import jsonconverter
+from Lib import csvconverter
+from Lib import jsonconverter
 
 
 def parse_data(args, output_data, output_type):
