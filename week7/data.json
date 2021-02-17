@@ -1,0 +1,23 @@
+{
+   "Paragraph A": [
+      {
+         "name": "Module_data",
+         "type": "file",
+         "format": "csv"
+      }
+   ],
+   "Paragraph B": [
+      {
+         "name": "User_data",
+         "type": "data_base",
+         "format": "json"
+      }
+   ],
+   "Paragraph C": [
+      {
+         "name": "Customer_data",
+         "type": "html",
+         "format": "csv"
+      }
+   ]
+}
