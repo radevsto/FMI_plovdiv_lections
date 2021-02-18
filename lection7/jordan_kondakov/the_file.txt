@@ -1,0 +1,3 @@
+Module_data type=file format=csv
+User_data type=data_base format=json
+Customer_data type=html format=csv
