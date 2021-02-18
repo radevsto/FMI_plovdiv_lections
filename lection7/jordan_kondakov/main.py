@@ -26,6 +26,8 @@ def open_and_read_file(file):
                 "format": splitted_paragraph[2].split("=")[1]
             }
 
+    _file.close()
+    
     json_output.to_json(dict_structure)
     csv_output.to_csv(dict_structure)
 
