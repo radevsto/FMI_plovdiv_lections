@@ -1,0 +1,9 @@
+## Begin Paragraph A
+Module_data type=file format=csv
+## End Paragraph A
+## Begin Paragraph B
+User_data type=data_base format=json
+## End Paragraph B
+## Begin Paragraph C
+Customer_data type=html format=csv
+## End Paragraph C
