@@ -22,8 +22,8 @@ from lib import CSVConverter
 # Read all lines from a text file (Task #1)
 def get_text_file_input(path: str):
     try:
-        file = open(path, "r")
-        return file.readlines()
+        with open(path, "r") as file:
+            return file.readlines()
     except:
         print("Could not locate file")
 
