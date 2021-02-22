@@ -1,20 +1,21 @@
 import argparse
 import sys
 import re
-from week_6_lib import json, csv
+import week_6_lib
 
-# program is started with args './source.txt'
+# program is started with args './source.txt' <'csv' or 'json'>
 
 # adds the args
 def load_args():
     parser = argparse.ArgumentParser(usage='week 6 task', description='week 6 task')
     parser.add_argument('file')
+    parser.add_argument('format')
     args = parser.parse_args()
     return args
 
 # reads file source.txt and returns a list of dictionaries with each paragraph
 # each dictionary has 1 key 'paragraph [A-Z]' and another dictionary with keys 'name', 'type', 'format' as its value
-def read_file(path):
+def convert_file(path, format):
     paragraphs = []
     with open(path) as file:
         content = file.read()
@@ -41,13 +42,11 @@ def read_file(path):
                     }
                 })
         file.close()
-    return paragraphs
+        if('json' == format):
+            json_formatter.format(paragraphs)
+        elif('csv' == format):
+            csv_formatter.format(paragraphs)
+
 
 args = load_args()
-data = read_file(args.file)
-
-ans = input('Select an output type:\n1. JSON \t\t 2. CSV\n\n')
-if ans == '1':
-    json.format(data)
-elif ans == '2':
-    csv.format(data)
+convert_file(args.file, args.format)
