@@ -33,7 +33,6 @@ def main():
                     return True
                 else:
                     return False
-
             else:
                 return False
 
@@ -47,7 +46,6 @@ def main():
 
             visited[i][j] = 1
             COUNT += 1
-
             # posible movements for x and y
             x_move = [0, 0, 1, -1]
             y_move = [1, -1, 0, 0]
@@ -80,7 +78,6 @@ def main():
                 for j in range(int(size[0])):
                     if (result[i][j] != 0):
                         print("*", end=' ')
-
                     else:
                         print('- ', end='')
 
@@ -98,7 +95,6 @@ def main():
                     # check the right cell
                     if (j + 1 < int(size[0])):
                         BFS(field[i][j], field[i][j + 1], i, j, field)
-
                     # updating the result
                     if (COUNT >= current_max):
                         current_max = COUNT
@@ -110,7 +106,6 @@ def main():
                     # check the bottom cell
                     if (i + 1 < int(size[0])):
                         BFS(field[i][j], field[i + 1][j], i, j, field)
-
                     # updating the result
                     if (COUNT >= current_max):
                         current_max = COUNT
