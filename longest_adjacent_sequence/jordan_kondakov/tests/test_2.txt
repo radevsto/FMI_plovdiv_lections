@@ -1,0 +1,5 @@
+4 4
+R R R G
+G B R G
+R G G G
+G G B B
