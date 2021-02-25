@@ -118,6 +118,9 @@ def main():
             print_result(current_max)
 
         find_longest_sequence(field)
+        
+        # test_4 won't work because it's not the right format
+        # run python main.py --nargs *the names of the files you want to find the longest color sequence for seperated by ' '* (example: python main.py --nargs test_1 test_2)
 
         f.close()
 
