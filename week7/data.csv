@@ -1,0 +1,4 @@
+paragraph|name|type|format
+Paragraph A|Module_data|file|csv
+Paragraph B|User_data|data_base|json
+Paragraph C|Customer_data|html|csv
